@@ -8,6 +8,8 @@ interface weatherData{
     weatherDescription:string,
     humidity:string,
     windSpeed:string,
+    countryCode:string,
+    iconConditionCode:string,
 }
 
 
@@ -27,7 +29,9 @@ function NavbarSearch(){
                 weatherCondition:data.weatherCondition,
                 weatherDescription:data.weatherDescription,
                 humidity:data.humidity,
-                windSpeed:data.windSpeed
+                windSpeed:data.windSpeed,
+                countryCode:data.countryCode,
+                iconConditionCode:data.iconConditionCode,
             }
 
             setWeatherData(dataSearch);
@@ -63,25 +67,35 @@ function NavbarSearch(){
                         <div style={{display:'flex', justifyContent:''}}>
                         <i className="fa-solid fa-location-dot"></i>
                         <span id="city" style={{marginLeft:'0.5em',marginRight:'1em'}}>{weatherData && weatherData.city}</span>
-                        <img src="https://flagsapi.com/BR/flat/32.png" alt="Bandeira do país" id='country' />
+                        <img src={`https://flagcdn.com/${weatherData && weatherData.countryCode.toLowerCase()}.svg`} alt="Country" id='country' style={{ width: '32px', height: 'auto' }} />
+
                         </div>
                         
                         <p id="temperature"><span> {weatherData && weatherData.temperature}</span>&deg;C </p>
                         <div id="description-container">
-                            <p>{weatherData && weatherData.weatherCondition}</p>
-                            <img src="" alt="Condições do tempo" id="weather-icon" />
+                            <p>{weatherData && weatherData.weatherDescription}</p>
+                            {weatherData && weatherData.iconConditionCode && (
+                            <img src={`http://openweathermap.org/img/wn/${weatherData.iconConditionCode}.png`} alt={weatherData.weatherDescription}
+                             id="weather-icon" />
+    )}
                         </div>
 
-                        <div id="details-container">
+                        <div id="details-container" style={{
+                            display: 'flex', justifyContent: "center", alignItems: "center",gap: '20px' // Espaço entre os contêineres 
+                        }}>
+                        <div style={{borderRight: '1px solid #FFF',paddingRight: '10px'}}>
                             <p id="humidity">
                                 <i className="fa-solid fa-droplet"></i>
-                                <span>{weatherData && weatherData.humidity}</span>
-                            </p>
-                            <p id="wind">
-                                <i className="fa-solid fa-wind"></i>
-                                <span>{weatherData && weatherData.windSpeed}</span>
+                                <span>{weatherData && `${weatherData.humidity}%`}</span>
                             </p>
                         </div>
+    <div> {/* Contêiner para o segundo <p> */}
+        <p id="wind">
+            <i className="fa-solid fa-wind"></i>
+            <span>{weatherData && `${weatherData.windSpeed} km/h`}</span>
+        </p>
+    </div>
+</div>
                     </h2>
                 </div>
             </div>
