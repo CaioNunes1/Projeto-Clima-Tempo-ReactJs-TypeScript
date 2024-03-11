@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import { fetchCity } from '../script';
 import { fetchPhotoCity } from '../scriptPhotoCity';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 interface weatherData{
     city:string,
@@ -75,10 +77,19 @@ function NavbarSearch(){
 
                 <div>
                     <h2>
-                        <div style={{display:'flex', justifyContent:''}}>
+                        <div style={{display:'flex', justifyContent:'space-around'}}>
                         <i className="fa-solid fa-location-dot"></i>
                         <span id="city" style={{marginLeft:'0.5em',marginRight:'1em'}}>{weatherData && weatherData.city}</span>
                         <img src={`https://flagcdn.com/${weatherData && weatherData.countryCode.toLowerCase()}.svg`} alt="" id='country' style={{ width: '32px', height: 'auto' }} />
+                        {weatherData &&  weatherData.city &&//se não forem vazias
+                        (<button onClick={() => {
+                            const encodedCity = encodeURIComponent(city);
+                            window.open(`https://www.google.com/maps/search/?api=1&query=${encodedCity}`, '_blank');
+                          }}
+                        style={{minWidth:'60px',marginLeft:'2em',backgroundColor:'#8dd0f5',borderRadius:'0.5em', }}>
+                            <img src="/2642502.webp" alt="Google Maps" style={{width: '24px', height: '24px'}} />
+                             </button>)}
+                        
 
                         </div>
                         
