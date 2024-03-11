@@ -78,7 +78,7 @@ function NavbarSearch(){
                         <div style={{display:'flex', justifyContent:''}}>
                         <i className="fa-solid fa-location-dot"></i>
                         <span id="city" style={{marginLeft:'0.5em',marginRight:'1em'}}>{weatherData && weatherData.city}</span>
-                        <img src={`https://flagcdn.com/${weatherData && weatherData.countryCode.toLowerCase()}.svg`} alt="Country" id='country' style={{ width: '32px', height: 'auto' }} />
+                        <img src={`https://flagcdn.com/${weatherData && weatherData.countryCode.toLowerCase()}.svg`} alt="" id='country' style={{ width: '32px', height: 'auto' }} />
 
                         </div>
                         
