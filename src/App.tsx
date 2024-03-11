@@ -1,5 +1,6 @@
 import './App.css'
 import NavbarSearch from './components/NavbarSearch'
+//import { fetchPhotoCity } from './scriptPhotoCity'
 
 function App() {
 

@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import { fetchCity } from '../script';
+import { fetchPhotoCity } from '../scriptPhotoCity';
 
 interface weatherData{
     city:string,
@@ -20,6 +21,7 @@ function NavbarSearch(){
     const handleSearch= async(event: React.FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
         const data= await fetchCity(city);
+        const imageURL=await fetchPhotoCity(city);
 
         try{
             if(data){
@@ -35,6 +37,15 @@ function NavbarSearch(){
             }
 
             setWeatherData(dataSearch);
+            }
+
+            if(imageURL){
+                const backgroundContainer= document.getElementById('background-container');
+                if(backgroundContainer){
+                    backgroundContainer.style.backgroundImage = `url(${imageURL})`;
+                    backgroundContainer.style.backgroundSize = 'cover'; // Certifique-se de cobrir a área toda
+                    backgroundContainer.style.backgroundPosition = 'center'; // Centralize a imagem
+                }
             }
             
             
